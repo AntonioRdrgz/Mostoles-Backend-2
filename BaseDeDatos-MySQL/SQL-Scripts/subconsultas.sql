@@ -111,6 +111,27 @@ from producto natural join (
     where producto.precio >= precioPromedio
     order by precio desc;
     
+/* OPERADORES QUE PODEMOS UTILIZAR EN LAS SUBCONSULTAS 
+
+ 1. Operadores basicos de comparacion (>, >=, <, <=, !=, <>, =) 
+ 2. Predicados (Predicate (Condicion que se evalua) ANY (SOME) y ALL 
+ 3- Predicados IN y NOT IN 
+ 4- Predicado EXISTS y NOT EXISTS */
+ 
+ /* Los Operadores basicos de comparacion se utilizan cuando queremos comparar una expresion
+ con el valor que devuelve una subconsulta */
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -2,30 +2,31 @@ use empresa;
 
 -- Recuperar todos los empleados y sus numeros de telefono
 select emp.nombre, emp.primerApellido, emp.segundoApellido, tel.numero
-from empleados emp join telefonos tel on emp.id = tel.empleado_id ;
+from empleados emp inner join telefonos tel on emp.id = tel.empleados_id;
 
--- Recuperar los empleado tengan o no numeros de telefono
+-- Recuperar los empleados tengan o no numeros de telefono
 select emp.nombre, emp.primerApellido, emp.segundoApellido, tel.numero
-from empleados emp left join telefonos tel on emp.id = tel.empleado_id ;
+from empleados emp left join telefonos tel on emp.id = tel.empleados_id;
 
 use world;
 
--- Ejercicio # 2 del Miercoles 18 de Nov: Recuperar los paises y el idioma hablado en cada pais,
--- siempre que sea una lengua oficial
-select co.Name, cl.Language 
-from country co join countrylanguage cl on co.Code = cl.CountryCode 
-	and cl.IsOfficial = 'T';
+-- Ejercicio 2: Recuperar los paises y el idioma hablado en cada pais siempre que sea una lengua oficial
+select pais.Name, idioma.Language
+from country pais inner join countrylanguage idioma on pais.Code = idioma.CountryCode
+where IsOfficial = true;
 
--- Ejercicio # 3 del Miercoles 18 de Nov: Recuperar la ciudad mas poblada
--- y el nombre del pais donde se encuentra dicha ciudad
-select ci.Name `Ciudad`, co.Name `Pais`, ci.Population
-from city ci join country co on ci.CountryCode = co.Code
-order by ci.Population desc
-limit 1 ;
+-- Ejercicio 3: Recuperar la ciudad mas poblada y el nombre del pais donde se encuentra dicha ciudad
 
--- Ejercicio # 4 del Miercoles 18 de Nov. Modificar la consulta del Ejercicio # 2 
--- para que solamente se muestren resultados para España y todos los idiomas, 
--- no solo los oficiales
-select co.Name, cl.Language 
-from country co join countrylanguage cl on co.Code = cl.CountryCode 
-	and co.Name = 'Spain';
+select country.Name ciudad, city.name pais, max(city.population) `total de habitantes`
+from country inner join city on country.code = city.countrycode
+group by ciudad, pais
+order by `total de habitantes` asc;
+
+-- Ejercicio 4: Modificar la consulta del ejercicio 2 para que solamente se muestren resultados para España y todos los idiomas, no solo los oficiales
+select pais.Name Pais, idioma.Language Idioma
+from country pais inner join countrylanguage idioma on pais.Code = idioma.CountryCode
+where pais.name = "Spain"
+group by pais.Name, idioma.Language;
+
+-- 
+table city;

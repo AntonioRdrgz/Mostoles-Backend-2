@@ -236,6 +236,13 @@ where p1.precio >= (
 	where p2.id_fabricante = p1.id_fabricante
 );
 
+/*Listado de los productos que tienen un precio mayor o igual a la media de todos los productos de ese mismo fabricante (version Elias)*/
+use tienda;
+SELECT nombre, precio, id_fabricante
+FROM producto prod WHERE EXISTS (
+SELECT * FROM producto WHERE prod.precio>= (
+SELECT AVG(precio) FROM producto p WHERE p.id_fabricante = prod.id_fabricante)
+);
 
 
 

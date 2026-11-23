@@ -245,15 +245,40 @@ Para la solucion poner en uso la base de datos tienda */
 
 use tienda;
 
-select *
-from producto p1
-where p1.precio >= (
-	select avg(p2.precio)
-	from producto p2
-	where p2.id_fabricante = p1.id_fabricante
-);
+SELECT 
+    *
+FROM
+    producto p1
+WHERE
+    p1.precio >= (SELECT 
+            AVG(p2.precio)
+        FROM
+            producto p2
+        WHERE
+            p2.id_fabricante = p1.id_fabricante);
 
+/* Listado de los productos que tienen un precio mayor o igual 
+a la media de todos los productos de ese mismo fabricante. 
 
+Solucion aportada por Elias */
+
+use tienda;
+SELECT 
+    nombre, precio, id_fabricante
+FROM
+    producto prod
+WHERE
+    EXISTS( SELECT 
+            *
+        FROM
+            producto
+        WHERE
+            prod.precio >= (SELECT 
+                    AVG(precio)
+                FROM
+                    producto p
+                WHERE
+                    p.id_fabricante = prod.id_fabricante));
 
 
 

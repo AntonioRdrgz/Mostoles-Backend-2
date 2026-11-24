@@ -281,6 +281,30 @@ WHERE
                     p.id_fabricante = prod.id_fabricante));
 
 
+/* 
+	Otro ejemplo de uso del operador EXISTS  en las subconsultas. 
+    
+    Utilizando la base de datos ejemplo_exists, se pide lo siguiente:
+    
+    
+    ¿Que tipo de tienda (almacen (store)) esta presente en una o mas ciudades?
+    
+     
+*/
+
+use ejemplo_exists;
+
+table cities;
+table stores;
+table cities_stores; 
+
+select store_type
+from stores 
+where exists (
+	select * from cities_stores 
+	where cities_stores.store_type = stores.store_type 
+);
+
 
 
 

@@ -244,8 +244,30 @@ SELECT * FROM producto WHERE prod.precio>= (
 SELECT AVG(precio) FROM producto p WHERE p.id_fabricante = prod.id_fabricante)
 );
 
-
-
+/* 
+	otro ejemplo de uso del operador EXISTS en las subconsultas
+    
+    utilizando la base de datos ejemplo_exists, se pide lo siguiente:
+    
+    
+    que tipo de tienda o almacen esta presente en una o más ciudades
+    
+ */
+    
+ use ejemplo_exists;
+ table cities;
+ table stores;
+ table cities_stores;
+ 
+ SELECT store_type
+ from stores
+ where exists ( 
+ 	select * from cities_stores 
+ 	where cities_stores.store_type = stores.store_type
+ );
+ 
+ 
+ 
 
 
 -- Consultas auxiliares
